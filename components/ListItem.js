@@ -16,13 +16,15 @@ const ListItem = ({
           <Image source={{ uri: logoUrl }} style={styles.image} />
           <View style={styles.titlesWrapper}>
             <Text style={styles.title}>{name}</Text>
-            <Text style={styles.subtitle}>{symbol}</Text>
+            <Text style={styles.subtitle}>{symbol.toUpperCase()}</Text>
           </View>
         </View>
 
         {/* Right side */}
         <View style={styles.rightWrapper}>
-          <Text style={styles.title}>{currentPrice}</Text>
+          <Text style={styles.title}>
+            ${currentPrice.toLocaleString("en-Us", { currency: "USD" })}
+          </Text>
           <Text style={(styles.subtitle, { color: "red" })}>
             {priceChangePercentage7d}
           </Text>
