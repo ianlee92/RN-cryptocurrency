@@ -8,6 +8,7 @@ const ListItem = ({
   priceChangePercentage7d,
   logoUrl,
 }) => {
+  const priceChangeColor = priceChangePercentage7d > 0 ? "#34C759" : "#FF3B30";
   return (
     <TouchableOpacity>
       <View style={styles.itemWrapper}>
@@ -25,8 +26,8 @@ const ListItem = ({
           <Text style={styles.title}>
             ${currentPrice.toLocaleString("en-Us", { currency: "USD" })}
           </Text>
-          <Text style={(styles.subtitle, { color: "red" })}>
-            {priceChangePercentage7d}
+          <Text style={(styles.subtitle, { color: priceChangeColor })}>
+            {priceChangePercentage7d.toFixed(2)}%
           </Text>
         </View>
       </View>
