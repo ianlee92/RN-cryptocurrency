@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import {
   ChartDot,
@@ -18,10 +18,17 @@ const Chart = ({
   sparkline,
 }) => {
   const latestCurrentPrice = useSharedValue(currentPrice);
+  const [chartReady, setChartReady] = useState(false);
+
   const priceChangeColor = priceChangePercentage7d > 0 ? "#34C759" : "#FF3B30";
+
   useEffect(() => {
     latestCurrentPrice.value = currentPrice;
+    setTimeout(() => {
+      setChartReady(true);
+    }, 0);
   }, [currentPrice]);
+
   const formatUSD = (value) => {
     "worklet";
     if (value === "") {
@@ -59,10 +66,12 @@ const Chart = ({
             </Text>
           </View>
         </View>
-        <View style={styles.chartLineWrapper}>
-          <ChartPath height={SIZE / 2} stroke="black" width={SIZE} />
-          <ChartDot style={{ backgroundColor: "black" }} />
-        </View>
+        {chartReady ? (
+          <View style={styles.chartLineWrapper}>
+            <ChartPath height={SIZE / 2} stroke="black" width={SIZE} />
+            <ChartDot style={{ backgroundColor: "black" }} />
+          </View>
+        ) : null}
       </View>
     </ChartPathProvider>
   );
