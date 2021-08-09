@@ -46,7 +46,12 @@ export default function App() {
         ref={bottomSheetModalRef}
         index={0}
         snapPoints={snapPoints}
-      ></BottomSheetModal>
+        style={styles.bottomSheet}
+      >
+        <View style={styles.contentContainer}>
+          <Text>Awesome</Text>
+        </View>
+      </BottomSheetModal>
     </BottomSheetModalProvider>
   );
 }
@@ -69,5 +74,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#A9ABB1",
     marginHorizontal: 16,
     marginTop: 16,
+  },
+  bottomSheet: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: -4,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
 });
