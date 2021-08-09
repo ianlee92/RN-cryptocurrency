@@ -4,8 +4,9 @@ import {
   ChartDot,
   ChartPath,
   ChartPathProvider,
+  ChartYLabel,
 } from "@rainbow-me/animated-charts";
-export const { width: SIZE } = Dimensions.get("window");
+const { width: SIZE } = Dimensions.get("window");
 const Chart = ({
   currentPrice,
   logoUrl,
@@ -15,6 +16,16 @@ const Chart = ({
   sparkline,
 }) => {
   const priceChangeColor = priceChangePercentage7d > 0 ? "#34C759" : "#FF3B30";
+  const formatUSD = (value) => {
+    "worklet";
+    if (value === "") {
+      return `$${currentPrice.toLocaleString("en-Us", { currency: "USD" })}`;
+    }
+    const formattedValue = `$${parseFloat(value)
+      .toFixed(2)
+      .replace(/\d(?=(\d{3})+\.)/g, "$&,")}`;
+    return formattedValue;
+  };
   return (
     <ChartPathProvider
       data={{ points: sparkline, smoothingStrategy: "bezier" }}
@@ -32,9 +43,7 @@ const Chart = ({
             <Text style={styles.subtitle}>7d</Text>
           </View>
           <View style={styles.lowerTitles}>
-            <Text style={styles.boldTitle}>
-              ${currentPrice.toLocaleString("en-Us", { currency: "USD" })}
-            </Text>
+            <ChartYLabel format={formatUSD} style={styles.boldTitle} />
             <Text style={[styles.title, { color: priceChangeColor }]}>
               {priceChangePercentage7d.toFixed(2)}%
             </Text>
