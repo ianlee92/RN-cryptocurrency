@@ -56,6 +56,7 @@ export default function App() {
             currentPrice={selectedCoinData.current_price}
             logoUrl={selectedCoinData.image}
             name={selectedCoinData.name}
+            symbol={selectedCoinData.symbol}
             priceChangePercentage7d={
               selectedCoinData.price_change_percentage_7d_in_currency
             }
